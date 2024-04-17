@@ -14,7 +14,21 @@ const insertIntoDb = async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 };
+const getAllPosts = async (req: Request, res: Response) => {
+  try {
+    const result = await PostService.getAllPost();
+    res.send({
+      status: 200,
+      success: true,
+      message: "Posts fetched successfully",
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
 
 export const PostController = {
   insertIntoDb,
+  getAllPosts,
 };
