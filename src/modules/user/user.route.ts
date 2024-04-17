@@ -4,10 +4,8 @@ import { UserController } from "./user.controller";
 const router = express.Router();
 
 router.post("/", UserController.insertIntoDb);
+router.get("/", UserController.getUser);
 router.post("/profile", UserController.insertOrUpdateProfile);
-
-// router.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
+router.get("/:id", UserController.getSingleUser);
 
 export const userRoutes = router;
