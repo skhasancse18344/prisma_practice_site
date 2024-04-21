@@ -29,8 +29,39 @@ const getAllPosts = async (req: Request, res: Response) => {
     res.status(500).send(err);
   }
 };
+const updatePost = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const data = req.body;
+    const result = await PostService.updatePost(id, data);
+    res.send({
+      status: 200,
+      success: true,
+      message: "Post updated successfully",
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+const deletePost = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const result = await PostService.deletePost(id);
+    res.send({
+      status: 200,
+      success: true,
+      message: "Post deleted successfully",
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
 
 export const PostController = {
   insertIntoDb,
   getAllPosts,
+  updatePost,
+  deletePost,
 };
